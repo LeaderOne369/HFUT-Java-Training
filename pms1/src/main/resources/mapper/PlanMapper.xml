@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.pms1.mapper.PlanMapper">
+    <select id="getPlanDetail" resultType="com.example.pms1.dto.PlanDetail">
+        SELECT plans.*,
+               pi.project_name,
+               p.name as predecessor_plan_name
+        FROM plans
+                 LEFT JOIN pms1.project_info pi on pi.id = plans.project_id
+                 LEFT JOIN pms1.plans p on p.plan_id = plans.predecessor_plan_id
+        WHERE plans.plan_id = #{id}
+    </select>
+</mapper>

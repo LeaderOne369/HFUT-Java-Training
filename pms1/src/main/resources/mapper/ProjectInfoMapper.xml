@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.pms1.mapper.ProjectInfoMapper">
+    <select id="getDetail" resultType="com.example.pms1.dto.ProjectDetail">
+        SELECT project_info.*,
+               companies.company_name,
+               departments.department_name,
+               regions.region_name,
+               project_categories.category_name       as project_category_name,
+               project_subcategories.subcategory_name as project_sub_category_name,
+               project_stages.stage_name              as project_stage_name
+        FROM project_info
+                 LEFT JOIN companies ON project_info.company = companies.company_id
+                 LEFT JOIN departments ON project_info.department = departments.department_id
+                 LEFT JOIN regions ON project_info.region = regions.region_id
+                 LEFT JOIN project_categories ON project_info.project_category = project_categories.category_id
+                 LEFT JOIN project_stages ON project_info.project_stage = project_stages.stage_id
+                 LEFT JOIN project_subcategories on project_info.project_sub_category = project_subcategories.subcategory_id
+        WHERE project_info.id = #{id}
+    </select>
+</mapper>

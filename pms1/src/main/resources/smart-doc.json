@@ -1,0 +1,8 @@
+{
+  "outPath": "target/doc",
+  "allInOne": true,
+  "coverOld": true,
+  "allInOneDocFileName": "后端文档",
+  "serverUrl": "http://localhost:8080/",
+  "projectName": "后端服务"
+}
